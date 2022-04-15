@@ -19,15 +19,18 @@ const useTab = (initialTab, allTabs) => {
   const [currentIndex, setCurrentIndex] = useState(initialTab);
   return {
     currentTab: allTabs[currentIndex],
+    changeTab: setCurrentIndex,
   };
 };
 
 const UseTab = () => {
-  const { currentTab } = useTab(0, content);
+  const { currentTab, changeTab } = useTab(0, content);
   return (
     <div>
-      {content.map((section) => (
-        <button key={section.tab}>{section.tab}</button>
+      {content.map((section, index) => (
+        <button onClick={() => changeTab(index)} key={section.tab}>
+          {section.tab}
+        </button>
       ))}
       {currentTab.context}
     </div>
